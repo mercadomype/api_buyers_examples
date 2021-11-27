@@ -1,0 +1,41 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+button {
+  margin: 5px;
+}
+
+input {
+  font-family: monospace;
+}
+
+#logo {
+  margin-bottom: 70px;
+}
+
+.rounded {
+  border-radius: 10px;
+  padding: 7px;
+}
+
+#apikey {
+  background-color: rgb(176, 210, 255);
+  border: 1px solid rgb(96, 131, 177);
+
+}
+
+#results {
+  width: 90%;
+  height: 300px;
+  background-color: rgb(241, 241, 213);
+  border: 2px solid rgb(124, 124, 111);
+  margin-top: 50px;
+  padding: 20px;
+  overflow-y: scroll;
+}

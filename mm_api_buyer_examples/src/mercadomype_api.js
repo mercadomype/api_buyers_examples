@@ -1,5 +1,5 @@
-let MM_Environment = 'production';
-//let MM_Environment = 'integration';
+//let MM_Environment = 'production';
+let MM_Environment = 'integration';
 
 const superagent = require('superagent');
 
@@ -159,10 +159,57 @@ async function getAdvanceRequestedDocuments(aToken) {
     }  
 }
 
+async function addDocuments(aToken,aDocumentArray) {
 
+    try {
+        urlWS = urlBase + '/system/api/billfold/batch';
+        rawdata = await superagent.post(urlWS)
+            .set({'Authorization': aToken, "Content-Type": "application/json"})
+            .send(aDocumentArray);
+
+        let result = { success: true, result: rawdata.body };
+
+        return result;
+    } catch (error) {
+        return { success: false, message: error.message };
+    }  
+}
+
+async function deleteDocument(aToken,aSellerID,aDocumentID) {
+
+    try {
+        urlWS = urlBase + '/system/api/billfold/'+aSellerID+'::'+aDocumentID;
+        rawdata = await superagent.delete(urlWS)
+            .set({'Authorization': aToken, "Content-Type": "application/json"});    
+
+        let result = { success: true, result: {} };
+
+        return result;
+    } catch (error) {
+        return { success: false, message: error.message };
+    }  
+}
+
+// UTILITIES
+// =================================================
+
+function formatDTCustom(aDate) {
+    var day = twoDigitPad(aDate.getDate()), month = twoDigitPad(aDate.getMonth()+1), year = aDate.getFullYear(), hour = twoDigitPad(aDate.getHours()), minute = twoDigitPad(aDate.getMinutes()), second = twoDigitPad(aDate.getSeconds()), miliseconds = aDate.getMilliseconds();
+    return String(year) + '.' + String(month) + '.' + String(day) + ' ' + String(hour) + ':' + String(minute) + ':' + String(second) + '.' + String(miliseconds);
+}
+
+function timestamp() {
+    return formatDTCustom(new Date())
+};
+
+function twoDigitPad(num) {
+    return num < 10 ? "0" + num : String(num);
+}
 
 module.exports = { setEnvironment,
                    getToken,
                    getBuyerInformation,
                    getSellers, addSellerToNetwork, addMultipleSellersToNetwork, removeSellerFromNetwork,
-                   getProgrammedDocuments, getAdvanceRequestedDocuments };
+                   getProgrammedDocuments, getAdvanceRequestedDocuments, addDocuments, deleteDocument,
+                   formatDTCustom, timestamp
+                };

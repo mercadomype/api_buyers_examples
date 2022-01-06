@@ -167,7 +167,7 @@ async function addDocuments(aToken,aDocumentArray) {
             .set({'Authorization': aToken, "Content-Type": "application/json"})
             .send(aDocumentArray);
 
-        let result = { success: true, result: rawdata.body };
+        let result = { success: rawdata.status == 200, result: rawdata.body };
 
         return result;
     } catch (error) {
@@ -182,7 +182,7 @@ async function deleteDocument(aToken,aSellerID,aDocumentID) {
         rawdata = await superagent.delete(urlWS)
             .set({'Authorization': aToken, "Content-Type": "application/json"});    
 
-        let result = { success: true, result: {} };
+        let result = { success: rawdata.status == 200, result: rawdata.body };
 
         return result;
     } catch (error) {

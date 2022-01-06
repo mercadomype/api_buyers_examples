@@ -107,12 +107,12 @@ router.get('/testIntegration', async function(req, res, next) {
     }
   ];
 
-  /*tmp = await mm_api.addDocuments(token, invoices);
+  tmp = await mm_api.addDocuments(token, invoices);
   if(!tmp.success) {
     log.push({ dt: mm_api.timestamp(), event: 'Error uploading invoices', data: tmp });
     res.json(log);
     return;
-  }*/
+  }
   log.push({ dt: mm_api.timestamp(), event: 'Two invoices uploaded'});
 
   // Get documents with requested advance payment
@@ -125,7 +125,7 @@ router.get('/testIntegration', async function(req, res, next) {
   log.push({ dt: mm_api.timestamp(), event: 'Advance payment requests retrieved'});
 
   // Delete just-inserted invoices
-  tmp = await mm_api.deleteDocument(token,'24242424241','F100_TEST_001');
+  /*tmp = await mm_api.deleteDocument(token,'24242424241','F100_TEST_001');
   if(!tmp.success) {
     log.push({ dt: mm_api.timestamp(), event: 'Error deleting first document', data: tmp });
     res.json(log);
@@ -139,7 +139,7 @@ router.get('/testIntegration', async function(req, res, next) {
     res.json(log);
     return;
   }
-  log.push({ dt: mm_api.timestamp(), event: 'Second document deleted'});  
+  log.push({ dt: mm_api.timestamp(), event: 'Second document deleted'}); */ 
 
 
 
